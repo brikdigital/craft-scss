@@ -16,8 +16,6 @@ use Craft;
 use craft\base\Component;
 
 use ScssPhp\ScssPhp\Compiler;
-use ScssPhp\ScssPhp\OutputStyle\Compressed;
-use ScssPhp\ScssPhp\OutputStyle\Expanded;
 
 use yii\web\View;
 
@@ -39,7 +37,7 @@ class ScssService extends Component
     // Public Methods
     // =========================================================================
 
-    public function scss($scss = "", $attributes = "")
+    public function scss($scss = "", $attributes = ""): void
     {
         $attributes = unserialize($attributes);
         $compiler = new Compiler();

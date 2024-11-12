@@ -37,7 +37,7 @@ class Settings extends Model
      *
      * @var string
      */
-    public $outputFormat = 'compressed';
+    public string $outputFormat = 'compressed';
     
     /**
      * Some model attribute
@@ -45,7 +45,7 @@ class Settings extends Model
      * @var string
      */
 
-    public $devModeOutputFormat = 'expanded';
+    public string $devModeOutputFormat = 'expanded';
 
     /**
      * Some model attribute
@@ -53,7 +53,7 @@ class Settings extends Model
      * @var boolean
      */
 
-    public $debug = false;
+    public bool $debug = false;
 
     // Public Methods
     // =========================================================================

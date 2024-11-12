@@ -11,6 +11,8 @@
 namespace chasegiunta\scss\twigextensions;
 
 use chasegiunta\scss\twigextensions\ScssNode;
+use Twig\Token;
+use Twig\TokenParser\AbstractTokenParser;
 
 /**
  * SCSS twig token parser
@@ -19,18 +21,18 @@ use chasegiunta\scss\twigextensions\ScssNode;
  * @package   SCSS
  * @since     1.0.0
  */
-class ScssTokenParser extends \Twig\TokenParser\AbstractTokenParser
+class ScssTokenParser extends AbstractTokenParser
 {
     // Public Methods
     // =========================================================================
     /**
      * Parses {% scss %}...{% endscss %} tags
      *
-     * @param \Twig\Token $token
+     * @param Token $token
      *
      * @return \chasegiunta\scss\twigextensions\ScssNode
      */
-    public function parse(\Twig\Token $token)
+    public function parse(Token $token): ScssNode
     {
         $lineNo = $token->getLine();
         $stream = $this->parser->getStream();
@@ -41,24 +43,24 @@ class ScssTokenParser extends \Twig\TokenParser\AbstractTokenParser
             'debug'         => false,
         ];
 
-        if ($stream->test(\Twig\Token::NAME_TYPE, 'expanded')) {
+        if ($stream->test(Token::NAME_TYPE, 'expanded')) {
             $attributes['expanded'] = true;
             $stream->next();
         }
 
-        if ($stream->test(\Twig\Token::NAME_TYPE, 'compressed')) {
+        if ($stream->test(Token::NAME_TYPE, 'compressed')) {
             $attributes['compressed'] = true;
             $stream->next();
         }
 
-        if ($stream->test(\Twig\Token::NAME_TYPE, 'debug')) {
+        if ($stream->test(Token::NAME_TYPE, 'debug')) {
             $attributes['debug'] = true;
             $stream->next();
         }
 
-        $stream->expect(\Twig\Token::BLOCK_END_TYPE);
+        $stream->expect(Token::BLOCK_END_TYPE);
         $nodes['body'] = $this->parser->subparse([$this, 'decideScssEnd'], true);
-        $stream->expect(\Twig\Token::BLOCK_END_TYPE);
+        $stream->expect(Token::BLOCK_END_TYPE);
 
         return new ScssNode($nodes, $attributes, $lineNo, $this->getTag());
     }
@@ -66,17 +68,17 @@ class ScssTokenParser extends \Twig\TokenParser\AbstractTokenParser
     /**
      * @return string
      */
-    public function getTag()
+    public function getTag(): string
     {
         return 'scss';
     }
 
     /**
-     * @param \Twig\Token $token
+     * @param Token $token
      *
      * @return bool
      */
-    public function decideScssEnd(\Twig\Token $token)
+    public function decideScssEnd(Token $token): bool
     {
         return $token->test('endscss');
     }

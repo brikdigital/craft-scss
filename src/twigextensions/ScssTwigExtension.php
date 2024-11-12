@@ -10,11 +10,7 @@
 
 namespace chasegiunta\scss\twigextensions;
 
-use chasegiunta\scss\Scss;
-
-use Craft;
-
-use craft\web\twig\tokenparsers\RegisterResourceTokenParser;
+use Twig\Extension\AbstractExtension;
 
 
 /**
@@ -28,7 +24,7 @@ use craft\web\twig\tokenparsers\RegisterResourceTokenParser;
  * @package   Scss
  * @since     1.0.0
  */
-class ScssTwigExtension extends \Twig\Extension\AbstractExtension
+class ScssTwigExtension extends AbstractExtension
 {
     // Public Methods
     // =========================================================================
@@ -38,7 +34,7 @@ class ScssTwigExtension extends \Twig\Extension\AbstractExtension
      *
      * @return string The extension name
      */
-    public function getName()
+    public function getName(): string
     {
         return 'Scss';
     }
@@ -49,7 +45,7 @@ class ScssTwigExtension extends \Twig\Extension\AbstractExtension
      * @return array An array of Twig_TokenParserInterface or
      * Twig_TokenParserBrokerInterface instances
      */
-    public function getTokenParsers()
+    public function getTokenParsers(): array
     {
         return [
             new ScssTokenParser(),

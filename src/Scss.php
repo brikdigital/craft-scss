@@ -14,8 +14,8 @@ use chasegiunta\scss\services\ScssService as ScssServiceService;
 use chasegiunta\scss\twigextensions\ScssTwigExtension;
 use chasegiunta\scss\models\Settings;
 
-
 use Craft;
+use craft\base\Model;
 use craft\base\Plugin;
 use craft\services\Plugins;
 use craft\events\PluginEvent;
@@ -129,7 +129,7 @@ class Scss extends Plugin
     /**
      * @return Settings
      */
-    protected function createSettingsModel(): ?\craft\base\Model
+    protected function createSettingsModel(): ?Model
     {
         return new Settings();
     }

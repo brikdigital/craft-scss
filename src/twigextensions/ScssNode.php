@@ -11,6 +11,9 @@
 namespace chasegiunta\scss\twigextensions;
 
 use chasegiunta\scss\Scss;
+use Twig\Compiler;
+use Twig\Node\Node;
+use Twig\Node\NodeCaptureInterface;
 
 /**
  * Compile twig node parser
@@ -19,14 +22,14 @@ use chasegiunta\scss\Scss;
  * @package   SCSS
  * @since     1.0.0
  */
-class ScssNode extends \Twig\Node\Node implements \Twig\Node\NodeCaptureInterface
+class ScssNode extends Node implements NodeCaptureInterface
 {
     // Public Methods
     // =========================================================================
     /**
-     * @param \Twig\Compiler $compiler
+     * @param Compiler $compiler
      */
-    public function compile(\Twig\Compiler $compiler)
+    public function compile(Compiler $compiler): void
     {
         // Left for reference:
         // $crunched = $this->getAttribute('crunched');
